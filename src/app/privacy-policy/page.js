@@ -53,6 +53,8 @@ const sections = [
   },
 ];
 
+const paragraphs = sections.flatMap((section) => section.items);
+
 export const metadata = {
   title: "Privacy Policy | GoJobin",
   description: "GoJobin privacy policy for collection, use, and protection of user information.",
@@ -64,7 +66,7 @@ export default function PrivacyPolicy() {
       eyebrow="Policy"
       title="Privacy Policy"
       intro="This Privacy Policy explains how GoJobin collects, uses, shares, protects, and manages user information."
-      sections={sections}
+      paragraphs={paragraphs}
     />
   );
 }

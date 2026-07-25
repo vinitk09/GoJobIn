@@ -85,6 +85,8 @@ const sections = [
   },
 ];
 
+const paragraphs = sections.flatMap((section) => section.items);
+
 export const metadata = {
   title: "Terms | GoJobin",
   description: "GoJobin terms of use for website access and services.",
@@ -96,7 +98,7 @@ export default function Terms() {
       eyebrow="Legal"
       title="Terms"
       intro="These Terms govern access to and use of GoJobin, including job search, recruitment, enquiry, listing, and related services."
-      sections={sections}
+      paragraphs={paragraphs}
     />
   );
 }

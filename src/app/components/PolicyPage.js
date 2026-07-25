@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PolicyPage({ eyebrow, title, intro, sections }) {
+export default function PolicyPage({ eyebrow, title, intro, paragraphs }) {
   return (
     <main className="min-h-screen bg-[#f7fafc] text-slate-950">
       <header className="border-b border-slate-200 bg-white">
@@ -35,23 +35,13 @@ export default function PolicyPage({ eyebrow, title, intro, sections }) {
       </section>
 
       <section className="mx-auto max-w-5xl px-5 py-12 lg:px-8">
-        <div className="space-y-6">
-          {sections.map((section) => (
-            <article
-              className="rounded-[8px] border border-slate-200 bg-white p-6 shadow-sm"
-              key={section.heading}
-            >
-              <h2 className="text-2xl font-semibold text-slate-950">
-                {section.heading}
-              </h2>
-              <div className="mt-4 space-y-4 text-sm leading-7 text-slate-600">
-                {section.items.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
+        <article className="rounded-[8px] border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="space-y-5 text-base leading-8 text-slate-600">
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </article>
       </section>
     </main>
   );

@@ -39,6 +39,8 @@ const sections = [
   },
 ];
 
+const paragraphs = sections.flatMap((section) => section.items);
+
 export const metadata = {
   title: "Listing Policy | GoJobin",
   description: "GoJobin listing policy and prohibited listing standards.",
@@ -50,7 +52,7 @@ export default function ListingPolicy() {
       eyebrow="Policy"
       title="Listing Policy"
       intro="This policy explains the standards users must follow while posting, listing, or sharing information on GoJobin."
-      sections={sections}
+      paragraphs={paragraphs}
     />
   );
 }
