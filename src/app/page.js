@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EnquiryModal from "./components/EnquiryModal";
 
 const locations = ["Delhi", "Kolkata", "Mumbai", "Bangalore", "Chennai"];
@@ -108,6 +108,51 @@ export default function Home() {
   const [enquiryFor, setEnquiryFor] = useState("General enquiry");
   const [selectedSector, setSelectedSector] = useState("Select sector");
   const [isSectorOpen, setIsSectorOpen] = useState(false);
+
+  useEffect(() => {
+    const revealItems = Array.from(
+      document.querySelectorAll("[data-scroll-reveal]"),
+    );
+
+    if (revealItems.length === 0) {
+      return undefined;
+    }
+
+    document.documentElement.classList.add("scroll-reveal-ready");
+
+    if (!("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+
+      return () => {
+        document.documentElement.classList.remove("scroll-reveal-ready");
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -80px 0px",
+        threshold: 0.16,
+      },
+    );
+
+    revealItems.forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${(index % 3) * 90}ms`);
+      observer.observe(item);
+    });
+
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove("scroll-reveal-ready");
+    };
+  }, []);
 
   function openEnquiry(context) {
     setEnquiryFor(context);
@@ -372,7 +417,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white">
+      <section className="border-y border-slate-200 bg-white" data-scroll-reveal>
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-slate-200 px-5 sm:grid-cols-4 lg:px-8">
           {stats.map((item) => (
             <div key={item.label} className="stat-card bg-white py-8 text-center">
@@ -387,7 +432,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#0a66b2] py-4 text-white">
+      <section className="bg-[#0a66b2] py-4 text-white" data-scroll-reveal>
         <div className="ticker mx-auto max-w-7xl overflow-hidden px-5 lg:px-8">
           <div className="ticker-track flex min-w-max gap-8 text-sm font-semibold uppercase">
             {[...companies, ...companies].map((company, index) => (
@@ -399,7 +444,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="jobs" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+      <section
+        id="jobs"
+        className="mx-auto max-w-7xl px-5 py-16 lg:px-8"
+        data-scroll-reveal
+      >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-normal text-[#0a66b2]">
@@ -438,7 +487,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white">
+      <section className="bg-white" data-scroll-reveal>
         <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-normal text-[#0a66b2]">
@@ -473,7 +522,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-[#f7fafc]">
+      <section className="border-y border-slate-200 bg-[#f7fafc]" data-scroll-reveal>
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
           <div>
             <p className="text-sm font-semibold uppercase tracking-normal text-[#c95709]">
@@ -508,6 +557,7 @@ export default function Home() {
       <section
         id="candidate"
         className="relative overflow-hidden border-y border-slate-200 bg-[#102f53] text-white"
+        data-scroll-reveal
       >
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(10,102,178,0.45),rgba(16,47,83,0)_55%,rgba(244,122,32,0.22))]" />
         <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
@@ -547,7 +597,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="employer" className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+      <section
+        id="employer"
+        className="mx-auto max-w-7xl px-5 py-16 lg:px-8"
+        data-scroll-reveal
+      >
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-[8px] border border-slate-200 bg-white p-6 shadow-sm shadow-blue-950/5">
             <p className="text-sm font-semibold uppercase tracking-normal text-[#0a66b2]">
@@ -603,7 +657,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="bg-white">
+      <section id="about" className="bg-white" data-scroll-reveal>
         <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
@@ -631,7 +685,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-[#f7fafc]">
+      <section className="border-y border-slate-200 bg-[#f7fafc]" data-scroll-reveal>
         <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
             <div>
@@ -674,7 +728,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="enquiry" className="bg-white">
+      <section id="enquiry" className="bg-white" data-scroll-reveal>
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[0.86fr_1.14fr] lg:px-8">
           <div>
             <p className="text-sm font-semibold uppercase tracking-normal text-[#c95709]">
@@ -777,46 +831,88 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-slate-950 text-white">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.3fr_0.7fr_0.7fr] lg:px-8">
-          <div>
+      <footer className="bg-[#24262b] text-white" data-scroll-reveal>
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:py-20 md:grid-cols-2 lg:grid-cols-[1.35fr_0.85fr_0.85fr_0.85fr] lg:px-8">
+          <div className="max-w-md">
             <Image
-              src="/image.png"
+              src="/GoJobin-logo.png"
               alt="GoJobin"
-              width={154}
-              height={58}
-              className="h-auto w-32 rounded-[6px] bg-white p-2"
+              width={1366}
+              height={573}
+              className="h-auto w-56 sm:w-72"
             />
-            <p className="mt-4 max-w-md text-sm leading-6 text-slate-300">
-              Search jobs, upload resumes, and post openings on GoJobin.com.
+            <p className="mt-7 max-w-sm text-base font-medium leading-7 text-slate-400">
+              GoJobin is the most innovative online job portal in India.
+              GoJobin has become a prominent name in the recruitment industry.
             </p>
+            <a
+              className="shine-button mt-9 rounded-[4px] bg-[#0a66b2] px-7 py-4 text-sm font-bold uppercase text-white shadow-lg shadow-blue-950/20"
+              href="#about"
+            >
+              Learn more
+            </a>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-normal text-white">
-              Site links
+            <h3 className="text-2xl font-bold tracking-normal text-white">
+              Quick Links
             </h3>
-            <div className="mt-4 grid gap-3 text-sm font-medium text-slate-300">
-              <a className="transition hover:text-white" href="#">Home</a>
-              <a className="transition hover:text-white" href="#about">About us</a>
-              <a className="transition hover:text-white" href="#candidate">Candidate</a>
-              <a className="transition hover:text-white" href="#employer">Employer</a>
-              <a className="transition hover:text-white" href="#jobs">All Jobs</a>
-              <a className="transition hover:text-white" href="#enquiry">Enquiry</a>
-            </div>
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-normal text-white">
-              Quick links
-            </h3>
-            <div className="mt-4 grid gap-3 text-sm font-medium text-slate-300">
+            <div className="mt-9 grid gap-4 text-base font-medium text-slate-400">
+              <a className="transition hover:text-white" href="/terms">
+                Terms & Conditions
+              </a>
               <a className="transition hover:text-white" href="/privacy-policy">
                 Privacy Policy
               </a>
-              <a className="transition hover:text-white" href="/terms">
-                Terms and Condition
-              </a>
               <a className="transition hover:text-white" href="/fraud-alert">
                 Fraud Alert
+              </a>
+              <a className="transition hover:text-white" href="/disclaimer">
+                Disclaimer
+              </a>
+              <a className="transition hover:text-white" href="#enquiry">
+                Contact us
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold tracking-normal text-white">
+              For Candidates
+            </h3>
+            <div className="mt-9 grid gap-4 text-base font-medium text-slate-400">
+              <a className="transition hover:text-white" href="#candidate">
+                Candidate Desk
+              </a>
+              <a className="transition hover:text-white" href="#jobs">
+                Jobs Listing
+              </a>
+              <a className="transition hover:text-white" href="#candidate">
+                Upload Resume
+              </a>
+              <a className="transition hover:text-white" href="#about">
+                About us
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold tracking-normal text-white">
+              For Employers
+            </h3>
+            <div className="mt-9 grid gap-4 text-base font-medium text-slate-400">
+              <a className="transition hover:text-white" href="#pricing">
+                Job Packages
+              </a>
+              <a
+                className="transition hover:text-white"
+                href="#post-job"
+                data-enquiry="Post new job"
+              >
+                Post New Job
+              </a>
+              <a className="transition hover:text-white" href="#candidate">
+                Candidate Listing
+              </a>
+              <a className="transition hover:text-white" href="#employer">
+                Employer Desk
               </a>
             </div>
           </div>

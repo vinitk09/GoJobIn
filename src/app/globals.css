@@ -323,6 +323,22 @@ html {
   animation: ticker-slide 24s linear infinite;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal-ready [data-scroll-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 700ms ease-in-out,
+      transform 700ms ease-in-out;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .scroll-reveal-ready [data-scroll-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
