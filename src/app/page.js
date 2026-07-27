@@ -809,14 +809,14 @@ export default function Home() {
               Quick links
             </h3>
             <div className="mt-4 grid gap-3 text-sm font-medium text-slate-300">
-              <a className="transition hover:text-white" href="/listing-policy">
-                Listing Policy
-              </a>
               <a className="transition hover:text-white" href="/privacy-policy">
                 Privacy Policy
               </a>
               <a className="transition hover:text-white" href="/terms">
-                Terms
+                Terms and Condition
+              </a>
+              <a className="transition hover:text-white" href="/fraud-alert">
+                Fraud Alert
               </a>
             </div>
           </div>
