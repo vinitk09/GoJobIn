@@ -103,6 +103,68 @@ const stories = [
   },
 ];
 
+const footerCompanyLinks = [
+  { label: "About Us", href: "#about" },
+  { label: "Contact Us", href: "#enquiry" },
+];
+
+const footerQuickLinks = [
+  { label: "Listing Policy", href: "/disclaimer" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Use", href: "/terms" },
+];
+
+const socialLinks = [
+  { label: "Facebook", href: "#" },
+  { label: "X", href: "#" },
+  { label: "LinkedIn", href: "#" },
+  { label: "Instagram", href: "#" },
+];
+
+function SocialIcon({ label }) {
+  if (label === "Facebook") {
+    return (
+      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24">
+        <path
+          d="M14.1 8.7V6.9c0-.8.6-1.4 1.4-1.4H17V2.3h-2.7c-3 0-4.8 1.8-4.8 4.7v1.7H7v3.4h2.5v9.6h3.7v-9.6h3l.5-3.4h-3.5Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  if (label === "X") {
+    return (
+      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24">
+        <path
+          d="m13.8 10.5 6.6-7.7h-1.6l-5.7 6.7-4.6-6.7H3.2l7 10.2-7 8.2h1.6l6.1-7.1 4.9 7.1h5.3l-7.3-10.7Zm-2.2 2.6-.7-1L5.3 4h2.4l4.5 6.5.7 1 5.9 8.4h-2.4l-4.8-6.8Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  if (label === "LinkedIn") {
+    return (
+      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24">
+        <path
+          d="M6.9 8.9H3.5v11h3.4v-11ZM5.2 3.4a2 2 0 1 0 0 4.1 2 2 0 0 0 0-4.1Zm15.3 10.2c0-3.3-1.8-4.9-4.2-4.9a3.7 3.7 0 0 0-3.3 1.8V8.9H9.7v11H13v-5.4c0-1.4.3-2.8 2-2.8s1.8 1.6 1.8 2.9v5.3h3.4v-6.3Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24">
+      <path
+        d="M7.8 2.5h8.4a5.3 5.3 0 0 1 5.3 5.3v8.4a5.3 5.3 0 0 1-5.3 5.3H7.8a5.3 5.3 0 0 1-5.3-5.3V7.8a5.3 5.3 0 0 1 5.3-5.3Zm0 1.9a3.4 3.4 0 0 0-3.4 3.4v8.4a3.4 3.4 0 0 0 3.4 3.4h8.4a3.4 3.4 0 0 0 3.4-3.4V7.8a3.4 3.4 0 0 0-3.4-3.4H7.8Zm4.2 3.2a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8Zm0 1.9a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm4.7-2.3a1.1 1.1 0 1 1 0 2.1 1.1 1.1 0 0 1 0-2.1Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquiryFor, setEnquiryFor] = useState("General enquiry");
@@ -831,90 +893,128 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#24262b] text-white" data-scroll-reveal>
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:py-20 md:grid-cols-2 lg:grid-cols-[1.35fr_0.85fr_0.85fr_0.85fr] lg:px-8">
-          <div className="max-w-md">
+      <footer className="bg-[#071723] text-white" data-scroll-reveal>
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:py-16 md:grid-cols-2 lg:grid-cols-[1.12fr_0.78fr_0.9fr_1.05fr_1.35fr] lg:gap-12 lg:px-8">
+          <div className="max-w-[275px]">
             <Image
               src="/GoJobin-logo.png"
               alt="GoJobin"
               width={1366}
               height={573}
-              className="h-auto w-56 sm:w-72"
+              className="h-auto w-40 sm:w-48"
             />
-            <p className="mt-7 max-w-sm text-base font-medium leading-7 text-slate-400">
-              GoJobin is the most innovative online job portal in India.
-              GoJobin has become a prominent name in the recruitment industry.
+            <p className="mt-9 text-sm font-semibold leading-8 text-white">
+              gojobin.com is a classified website for jobs. Our goal at
+              gojobin.com is to make it as easy as possible to search or post
+              jobs.
             </p>
-            <a
-              className="shine-button mt-9 rounded-[4px] bg-[#0a66b2] px-7 py-4 text-sm font-bold uppercase text-white shadow-lg shadow-blue-950/20"
-              href="#about"
-            >
-              Learn more
-            </a>
           </div>
+
           <div>
-            <h3 className="text-2xl font-bold tracking-normal text-white">
+            <h3 className="text-xl font-bold tracking-normal text-white">
+              Company
+            </h3>
+            <div className="mt-9 grid gap-6 text-sm font-bold text-white">
+              {footerCompanyLinks.map((link) => (
+                <a
+                  className="group flex items-center gap-4 transition hover:text-[#2fb8ff]"
+                  href={link.href}
+                  key={link.label}
+                >
+                  <span className="text-base font-black leading-none text-[#21b8ff]">
+                    &gt;
+                  </span>
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold tracking-normal text-white">
               Quick Links
             </h3>
-            <div className="mt-9 grid gap-4 text-base font-medium text-slate-400">
-              <a className="transition hover:text-white" href="/terms">
-                Terms & Conditions
-              </a>
-              <a className="transition hover:text-white" href="/privacy-policy">
-                Privacy Policy
-              </a>
-              <a className="transition hover:text-white" href="/fraud-alert">
-                Fraud Alert
-              </a>
-              <a className="transition hover:text-white" href="/disclaimer">
-                Disclaimer
-              </a>
-              <a className="transition hover:text-white" href="#enquiry">
-                Contact us
-              </a>
+            <div className="mt-9 grid gap-6 text-sm font-bold text-white">
+              {footerQuickLinks.map((link) => (
+                <a
+                  className="group flex items-center gap-4 transition hover:text-[#2fb8ff]"
+                  href={link.href}
+                  key={link.label}
+                >
+                  <span className="text-base font-black leading-none text-[#21b8ff]">
+                    &gt;
+                  </span>
+                  <span>{link.label}</span>
+                </a>
+              ))}
             </div>
           </div>
+
           <div>
-            <h3 className="text-2xl font-bold tracking-normal text-white">
-              For Candidates
+            <h3 className="text-xl font-bold tracking-normal text-white">
+              Contact Us
             </h3>
-            <div className="mt-9 grid gap-4 text-base font-medium text-slate-400">
-              <a className="transition hover:text-white" href="#candidate">
-                Candidate Desk
-              </a>
-              <a className="transition hover:text-white" href="#jobs">
-                Jobs Listing
-              </a>
-              <a className="transition hover:text-white" href="#candidate">
-                Upload Resume
-              </a>
-              <a className="transition hover:text-white" href="#about">
-                About us
-              </a>
+            <div className="mt-9 space-y-5 text-sm font-bold leading-6 text-white">
+              <p>
+                Mobile No -
+                <a className="transition hover:text-[#2fb8ff]" href="tel:+919162080808">
+                  {" "}
+                  +91-9162080808
+                </a>
+              </p>
+              <p>Monday - Saturday</p>
+              <p>(10:00AM to 06:00PM IST)</p>
+              <p>
+                Email -
+                <a
+                  className="transition hover:text-[#2fb8ff]"
+                  href="mailto:info@gojobin.com"
+                >
+                  {" "}
+                  info@gojobin.com
+                </a>
+              </p>
+            </div>
+            <div className="mt-9 flex flex-wrap gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  aria-label={social.label}
+                  className="flex h-12 w-12 items-center justify-center bg-[#4a4d51] text-white transition hover:bg-[#0a66b2]"
+                  href={social.href}
+                  key={social.label}
+                >
+                  <SocialIcon label={social.label} />
+                </a>
+              ))}
             </div>
           </div>
+
           <div>
-            <h3 className="text-2xl font-bold tracking-normal text-white">
-              For Employers
+            <h3 className="text-xl font-bold tracking-normal text-white">
+              Subscribe With Us
             </h3>
-            <div className="mt-9 grid gap-4 text-base font-medium text-slate-400">
-              <a className="transition hover:text-white" href="#pricing">
-                Job Packages
-              </a>
-              <a
-                className="transition hover:text-white"
-                href="#post-job"
-                data-enquiry="Post new job"
-              >
-                Post New Job
-              </a>
-              <a className="transition hover:text-white" href="#candidate">
-                Candidate Listing
-              </a>
-              <a className="transition hover:text-white" href="#employer">
-                Employer Desk
-              </a>
-            </div>
+            <form
+              className="mt-9 grid max-w-[335px] gap-5 text-sm font-bold text-white"
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <label>
+                <span>Your Name</span>
+                <input
+                  className="mt-3 h-13 w-full bg-white px-4 text-sm font-medium text-slate-950 outline-none"
+                  type="text"
+                />
+              </label>
+              <label>
+                <span>Your Email</span>
+                <input
+                  className="mt-3 h-13 w-full bg-white px-4 text-sm font-medium text-slate-950 outline-none"
+                  type="email"
+                />
+              </label>
+              <button className="shine-button mt-1 h-12 w-fit bg-[#55585c] px-5 text-sm font-bold text-white transition hover:bg-[#0a66b2]">
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
       </footer>
