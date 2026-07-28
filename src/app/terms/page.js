@@ -553,17 +553,16 @@ const sections = [
 ];
 
 export const metadata = {
-  title: "Terms and Condition | GoJobin",
-  description: "GoJobin terms and condition for website access and services.",
+  title: "Terms & Conditions | GoJobin",
+  description: "GoJobin terms and conditions for website access and services.",
 };
 
 export default function Terms() {
   return (
     <PolicyPage
-      eyebrow="Legal"
-      title="Terms and Condition"
-      intro="Please read these terms and conditions carefully before accessing, browsing, or otherwise using GoJobin."
+      title="Terms & Conditions"
       sections={sections}
+      variant="document"
     />
   );
 }

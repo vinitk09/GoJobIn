@@ -258,10 +258,9 @@ export const metadata = {
 export default function PrivacyPolicy() {
   return (
     <PolicyPage
-      eyebrow="Policy"
       title="Privacy Policy"
-      intro="This Privacy Policy explains how GoJobin collects, uses, shares, protects, and manages user information."
       sections={sections}
+      variant="document"
     />
   );
 }

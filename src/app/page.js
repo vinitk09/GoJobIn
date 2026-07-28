@@ -109,16 +109,16 @@ const footerCompanyLinks = [
 ];
 
 const footerQuickLinks = [
-  { label: "Listing Policy", href: "/disclaimer" },
+  { label: "Disclaimer", href: "/disclaimer" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Use", href: "/terms" },
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "#" },
-  { label: "X", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Instagram", href: "#" },
+  { label: "Facebook", href: "https://www.facebook.com/gojobindia" },
+  { label: "X", href: "https://x.com/gojobindia" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/gojobin/" },
+  { label: "Instagram", href: "https://www.instagram.com/gojobindia/" },
 ];
 
 function SocialIcon({ label }) {
@@ -294,20 +294,25 @@ export default function Home() {
         </nav>
       </header>
 
+      <div className="bg-[#f47a20] px-5 py-3 text-center text-sm font-semibold text-white">
+        GoJobin website is coming soon - our main platform is currently under development.
+      </div>
+
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-0 bg-[linear-gradient(120deg,#eaf4ff_0%,#ffffff_48%,#fff5ee_100%)]" />
         <div className="hero-grid absolute inset-0 opacity-70" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-20">
           <div className="animate-fade-up">
             <p className="mb-4 inline-flex rounded-full border border-[#b7d8f5] bg-white px-4 py-2 text-sm font-medium text-[#0a66b2] shadow-sm">
-              India's innovative online job portal
+              Main website under development
             </p>
             <h1 className="max-w-3xl text-4xl font-extrabold leading-tight tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
-              GoJobin Jobs in India
+              GoJobin is coming soon
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-              Search fresher jobs, trained professional roles, and experienced
-              career opportunities across India's busiest hiring cities.
+              We are building a fresh job portal experience for candidates and
+              employers across India. Stay connected while the full website gets
+              ready.
             </p>
 
             <form
@@ -383,7 +388,7 @@ export default function Home() {
                   </div>
                 </div>
                 <button className="shine-button min-h-14 w-full min-w-[150px] whitespace-nowrap rounded-[6px] bg-[#f47a20] px-5 text-sm font-semibold leading-none text-white shadow-lg shadow-orange-900/20 transition hover:-translate-y-0.5">
-                  Search Jobs
+                  Notify Me
                 </button>
               </div>
             </form>
@@ -982,6 +987,8 @@ export default function Home() {
                   className="flex h-12 w-12 items-center justify-center bg-[#4a4d51] text-white transition hover:bg-[#0a66b2]"
                   href={social.href}
                   key={social.label}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <SocialIcon label={social.label} />
                 </a>

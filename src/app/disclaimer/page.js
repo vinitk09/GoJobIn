@@ -16,10 +16,9 @@ export const metadata = {
 export default function Disclaimer() {
   return (
     <PolicyPage
-      eyebrow="Disclaimer"
       title="Disclaimer"
-      intro="Important information for jobseekers using GoJobin.com."
       paragraphs={paragraphs}
+      variant="document"
     />
   );
 }

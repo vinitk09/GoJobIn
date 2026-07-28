@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 360" role="img" aria-label="Professional document banner">
+  <rect width="1600" height="360" fill="#102f53"/>
+  <path d="M0 0h1600v360H0z" fill="#102f53"/>
+  <path d="M0 266c142-38 270-41 386-8 121 35 226 31 342-12 119-44 236-50 351-17 137 39 252 29 382-30 51-23 97-37 139-42v203H0Z" fill="#0b233d" opacity=".68"/>
+  <path d="M0 78c125 28 231 31 318 9 111-29 209-20 294 26 97 52 205 59 325 21 124-39 250-37 378 7 107 37 201 36 285-4V0H0Z" fill="#16467d" opacity=".52"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity=".14" stroke-width="2">
+    <path d="M130 246h300M130 278h238M130 310h178"/>
+    <path d="M1168 78h250M1168 112h188M1168 146h230"/>
+    <path d="M760 86h170v118H760z"/>
+    <path d="M786 122h116M786 150h88M786 178h104"/>
+  </g>
+  <g opacity=".24">
+    <rect x="1018" y="202" width="210" height="118" rx="8" fill="#ffffff"/>
+    <rect x="1048" y="234" width="150" height="8" rx="4" fill="#16467d"/>
+    <rect x="1048" y="260" width="118" height="8" rx="4" fill="#16467d"/>
+    <rect x="1048" y="286" width="138" height="8" rx="4" fill="#16467d"/>
+  </g>
+  <g opacity=".18">
+    <rect x="486" y="178" width="176" height="126" rx="8" fill="#ffffff"/>
+    <rect x="516" y="210" width="110" height="8" rx="4" fill="#f47a20"/>
+    <rect x="516" y="236" width="86" height="8" rx="4" fill="#16467d"/>
+    <rect x="516" y="262" width="118" height="8" rx="4" fill="#16467d"/>
+  </g>
+  <path d="M0 0h1600v360H0z" fill="#071723" opacity=".34"/>
+</svg>

@@ -8,9 +8,9 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "GoJobin | Jobs in India",
+  title: "GoJobin | Coming Soon",
   description:
-    "Search fresher jobs, professional roles, and free job postings on GoJobin.",
+    "GoJobin's main website is under development and coming soon.",
 };
 
 export default function RootLayout({ children }) {
