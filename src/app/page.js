@@ -7,10 +7,10 @@ import EnquiryModal from "./components/EnquiryModal";
 const locations = ["Delhi", "Kolkata", "Mumbai", "Bangalore", "Chennai"];
 
 const stats = [
-  { value: "12k+", label: "Jobs added" },
-  { value: "58k+", label: "Active resumes" },
-  { value: "3k+", label: "Companies hiring" },
-  { value: "97%", label: "Fresher friendly roles" },
+  { value: "5", label: "Launch cities" },
+  { value: "8", label: "Sectors planned" },
+  { value: "2", label: "User journeys" },
+  { value: "Soon", label: "Full platform" },
 ];
 
 const categories = [
@@ -58,9 +58,9 @@ const jobs = [
 ];
 
 const steps = [
-  "Create your candidate profile",
-  "Search jobs by city, skill, and sector",
-  "Apply directly to verified openings",
+  "Candidate profiles in preparation",
+  "City and sector matching planned",
+  "Application alerts after launch",
 ];
 
 const benefits = [
@@ -89,12 +89,12 @@ const stories = [
   {
     name: "Aman Verma",
     role: "Fresher candidate",
-    text: "Found entry-level openings by city and applied without getting lost in complicated filters.",
+    text: "Wants city-wise fresher openings with simple alerts once the full platform launches.",
   },
   {
     name: "Priya Sharma",
     role: "HR executive",
-    text: "Posted a role and started receiving relevant candidate enquiries for local hiring needs.",
+    text: "Needs an easy way to prepare local hiring enquiries before posting tools go live.",
   },
   {
     name: "Rohit Das",
@@ -168,8 +168,6 @@ function SocialIcon({ label }) {
 export default function Home() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquiryFor, setEnquiryFor] = useState("General enquiry");
-  const [selectedSector, setSelectedSector] = useState("Select sector");
-  const [isSectorOpen, setIsSectorOpen] = useState(false);
 
   useEffect(() => {
     const revealItems = Array.from(
@@ -222,10 +220,6 @@ export default function Home() {
   }
 
   function handleFeatureClick(event) {
-    if (!event.target.closest("[data-sector-dropdown]")) {
-      setIsSectorOpen(false);
-    }
-
     const trigger = event.target.closest("[data-enquiry]");
 
     if (!trigger) {
@@ -286,19 +280,19 @@ export default function Home() {
             <a
               className="shine-button rounded-full bg-[#0a66b2] px-5 py-2.5 text-white shadow-sm shadow-blue-900/20"
               href="#post-job"
-              data-enquiry="Post a job"
+              data-enquiry="Employer launch enquiry"
             >
-              Post job
+              Employer enquiry
             </a>
           </div>
         </nav>
+
       </header>
 
-      <div className="bg-[#f47a20] px-5 py-3 text-center text-sm font-semibold text-white">
-        GoJobin website is coming soon - our main platform is currently under development.
-      </div>
-
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative bg-white">
+        <div className="sticky top-[126px] z-40 bg-[#f47a20] px-5 py-3 text-center text-sm font-semibold text-white shadow-md shadow-orange-950/10 max-sm:top-[162px]">
+          GoJobin website is coming soon - preview page only, applications and job posting are not live yet.
+        </div>
         <div className="absolute inset-0 bg-[linear-gradient(120deg,#eaf4ff_0%,#ffffff_48%,#fff5ee_100%)]" />
         <div className="hero-grid absolute inset-0 opacity-70" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-20">
@@ -341,51 +335,15 @@ export default function Home() {
                   />
                 </label>
                 <div
-                  className="field-card relative flex min-h-14 flex-col justify-center rounded-[6px] border border-slate-200 bg-slate-50 px-4"
-                  data-sector-dropdown
+                  aria-label="Sector selection will be available when the full website launches"
+                  className="field-card flex min-h-14 flex-col justify-center rounded-[6px] border border-slate-200 bg-slate-50 px-4"
                 >
                   <span className="text-xs font-medium uppercase tracking-normal text-slate-500">
                     Sector
                   </span>
-                  <button
-                    className="mt-1 flex w-full items-center justify-between gap-3 bg-transparent text-left text-sm font-medium text-slate-900 outline-none"
-                    aria-expanded={isSectorOpen}
-                    onClick={() => setIsSectorOpen((isOpen) => !isOpen)}
-                    type="button"
-                  >
-                    <span>{selectedSector}</span>
-                    <span
-                      className={`text-xs text-slate-500 transition ${
-                        isSectorOpen ? "rotate-180" : ""
-                      }`}
-                    >
-                      v
-                    </span>
-                  </button>
-                  <div
-                    className={`sector-menu absolute left-0 right-0 top-[calc(100%+8px)] z-30 rounded-[8px] border border-slate-200 bg-white p-2 shadow-xl shadow-blue-950/12 transition ${
-                      isSectorOpen
-                        ? "visible opacity-100"
-                        : "invisible opacity-0"
-                    }`}
-                  >
-                    {["IT & Software", "Sales", "Banking", "BPO"].map(
-                      (sector) => (
-                        <button
-                          className="w-full rounded-[6px] px-3 py-2 text-left text-sm font-medium text-slate-700 transition hover:bg-[#eaf4ff] hover:text-[#0a66b2]"
-                          key={sector}
-                          onClick={() => {
-                            setSelectedSector(sector);
-                            setIsSectorOpen(false);
-                            openEnquiry(`${sector} jobs`);
-                          }}
-                          type="button"
-                        >
-                          {sector}
-                        </button>
-                      ),
-                    )}
-                  </div>
+                  <span className="mt-1 text-sm font-medium text-slate-900">
+                    All sectors opening soon
+                  </span>
                 </div>
                 <button className="shine-button min-h-14 w-full min-w-[150px] whitespace-nowrap rounded-[6px] bg-[#f47a20] px-5 text-sm font-semibold leading-none text-white shadow-lg shadow-orange-900/20 transition hover:-translate-y-0.5">
                   Notify Me
@@ -397,16 +355,16 @@ export default function Home() {
               <a
                 className="rounded-full bg-[#13365f] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5"
                 href="#candidate"
-                data-enquiry="Upload resume"
+                data-enquiry="Candidate launch updates"
               >
-                Upload resume
+                Candidate updates
               </a>
               <a
                 className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0a66b2]"
                 href="#employer"
-                data-enquiry="Hiring enquiry"
+                data-enquiry="Employer launch updates"
               >
-                Hiring? Post free
+                Employer updates
               </a>
             </div>
 
@@ -431,14 +389,14 @@ export default function Home() {
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
                   <p className="text-xs font-medium uppercase tracking-normal text-[#0a66b2]">
-                    Live opportunities
+                    Launch preview
                   </p>
                   <h2 className="mt-1 text-xl font-bold text-slate-950">
-                    Fresh roles matched today
+                    Role examples coming soon
                   </h2>
                 </div>
-                <span className="pulse-live rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-                  Open
+                <span className="rounded-full bg-[#fff2e9] px-3 py-1 text-xs font-semibold text-[#c95709]">
+                  Preview
                 </span>
               </div>
 
@@ -470,12 +428,9 @@ export default function Home() {
                         {job.salary}
                       </span>
                     </div>
-                    <button
-                      className="mt-4 rounded-[6px] bg-[#0a66b2] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#16467d]"
-                      data-enquiry={`Apply for ${job.role}`}
-                    >
-                      Apply now
-                    </button>
+                    <span className="mt-4 inline-flex rounded-[6px] border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-600">
+                      Applications opening soon
+                    </span>
                   </article>
                 ))}
               </div>
@@ -504,7 +459,7 @@ export default function Home() {
           <div className="ticker-track flex min-w-max gap-8 text-sm font-semibold uppercase">
             {[...companies, ...companies].map((company, index) => (
               <span key={`${company}-${index}`} className="opacity-90">
-                {company} hiring on GoJobin
+                {company} launch preview
               </span>
             ))}
           </div>
@@ -519,37 +474,31 @@ export default function Home() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-normal text-[#0a66b2]">
-              Find work faster
+              Launch categories
             </p>
             <h2 className="mt-2 text-3xl font-bold text-slate-950">
               Popular job sectors
             </h2>
           </div>
-          <a
-            className="text-sm font-semibold text-[#0a66b2]"
-            href="#"
-            data-enquiry="View all sectors"
-          >
-            View all sectors
-          </a>
+          <span className="text-sm font-semibold text-[#0a66b2]">
+            Sectors in preview
+          </span>
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category) => (
-            <a
+            <article
               key={category}
-              href="#"
-              className="category-card rounded-[8px] border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-[#0a66b2] hover:shadow-lg hover:shadow-blue-950/10"
-              data-enquiry={`${category} jobs`}
+              className="category-card rounded-[8px] border border-slate-200 bg-white p-5 shadow-sm"
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-[#eaf4ff] text-sm font-semibold text-[#0a66b2]">
                 {category.slice(0, 2)}
               </span>
               <h3 className="mt-5 font-semibold text-slate-950">{category}</h3>
               <p className="mt-2 text-sm font-semibold text-slate-500">
-                Fresher and experienced openings
+                Launch category preview
               </p>
-            </a>
+            </article>
           ))}
         </div>
       </section>
@@ -636,15 +585,15 @@ export default function Home() {
               Built for freshers and growing professionals
             </h2>
             <p className="mt-4 leading-7 text-blue-100">
-              GoJobin helps job seekers build a searchable profile, discover
-              relevant openings, and move quickly when the right role appears.
+              GoJobin is preparing searchable profiles, city-led discovery, and
+              launch updates for candidates.
             </p>
             <a
               className="mt-7 inline-flex rounded-full bg-[#f47a20] px-6 py-3 text-sm font-semibold text-white"
               href="#register"
-              data-enquiry="Create candidate profile"
+              data-enquiry="Candidate launch updates"
             >
-              Create candidate profile
+              Join candidate updates
             </a>
           </div>
 
@@ -675,12 +624,12 @@ export default function Home() {
               Employers
             </p>
             <h2 className="mt-2 text-3xl font-bold text-slate-950">
-              Post jobs and reach active talent across India
+              Prepare hiring enquiries for launch
             </h2>
             <p className="mt-4 leading-7 text-slate-600">
-              Gojobin.com is a classified recruitment platform for employers
-              who need great people and candidates who want dependable career
-              opportunities.
+              Gojobin.com is preparing a classified recruitment platform for
+              employers who need great people and candidates who want
+              dependable career opportunities.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {["Free posting", "Resume access", "City targeting"].map(
@@ -707,18 +656,18 @@ export default function Home() {
               Start free
             </p>
             <h2 className="mt-2 text-3xl font-bold text-slate-950">
-              List your first opening today
+              Get ready for employer tools
             </h2>
             <p className="mt-4 leading-7 text-slate-600">
-              Share the role, location, experience range, and sector. GoJobin
-              puts the opportunity in front of relevant job seekers.
+              Share your launch interest with the GoJobin team while posting
+              tools are being prepared.
             </p>
             <a
               className="mt-7 inline-flex rounded-full bg-[#0a66b2] px-6 py-3 text-sm font-semibold text-white"
               href="#post-job"
-              data-enquiry="Post new job"
+              data-enquiry="Employer launch updates"
             >
-              Post new job
+              Employer updates
             </a>
           </div>
         </div>
@@ -743,9 +692,9 @@ export default function Home() {
                 job-search experience.
               </p>
               <p>
-                The platform is built around free job posting, searchable
-                openings, active resumes, and city-led discovery for India's
-                recruitment market.
+                The platform is being built around job posting, searchable
+                openings, candidate profiles, and city-led discovery for
+                India's recruitment market.
               </p>
             </div>
           </div>
@@ -874,12 +823,9 @@ export default function Home() {
                 <span className="text-xs font-medium uppercase text-slate-500">
                   Enquiry type
                 </span>
-                <select className="mt-2 bg-transparent text-sm text-slate-900 outline-none">
-                  <option>Looking for a job</option>
-                  <option>Hiring candidates</option>
-                  <option>Need pricing details</option>
-                  <option>General enquiry</option>
-                </select>
+                <span className="mt-2 text-sm font-medium text-slate-900">
+                  Launch enquiry
+                </span>
               </label>
               <label className="field-card flex flex-col rounded-[6px] border border-slate-200 bg-slate-50 px-4 py-3 sm:col-span-2">
                 <span className="text-xs font-medium uppercase text-slate-500">

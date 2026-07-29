@@ -80,16 +80,9 @@ export default function EnquiryModal({ context, isOpen, onClose }) {
               <span className="text-xs font-medium uppercase text-slate-500">
                 Enquiry type
               </span>
-              <select
-                className="mt-2 bg-transparent text-sm text-slate-900 outline-none"
-                defaultValue={context}
-              >
-                <option>{context}</option>
-                <option>Looking for a job</option>
-                <option>Hiring candidates</option>
-                <option>Need pricing details</option>
-                <option>General enquiry</option>
-              </select>
+              <span className="mt-2 text-sm font-medium text-slate-900">
+                {context}
+              </span>
             </label>
             <label className="field-card flex flex-col rounded-[6px] border border-slate-200 bg-slate-50 px-4 py-3 sm:col-span-2">
               <span className="text-xs font-medium uppercase text-slate-500">
