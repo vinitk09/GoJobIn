@@ -33,30 +33,6 @@ const companies = [
   "PeoplePro",
 ];
 
-const jobs = [
-  {
-    role: "Junior Frontend Developer",
-    company: "BrightStack Labs",
-    place: "Bangalore",
-    type: "Fresher",
-    salary: "3.6 - 5 LPA",
-  },
-  {
-    role: "Customer Success Associate",
-    company: "MetroHire Services",
-    place: "Delhi NCR",
-    type: "Full time",
-    salary: "2.8 - 4.2 LPA",
-  },
-  {
-    role: "Digital Marketing Executive",
-    company: "BluePeak Media",
-    place: "Mumbai",
-    type: "0-1 years",
-    salary: "3 - 4.5 LPA",
-  },
-];
-
 const steps = [
   "Candidate profiles in preparation",
   "City and sector matching planned",
@@ -168,6 +144,7 @@ function SocialIcon({ label }) {
 export default function Home() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquiryFor, setEnquiryFor] = useState("General enquiry");
+  const [isSubscribeNoticeOpen, setIsSubscribeNoticeOpen] = useState(false);
 
   useEffect(() => {
     const revealItems = Array.from(
@@ -233,6 +210,11 @@ export default function Home() {
   function handleFeatureSubmit(event, context) {
     event.preventDefault();
     openEnquiry(context);
+  }
+
+  function handleSubscribeSubmit(event) {
+    event.preventDefault();
+    setIsSubscribeNoticeOpen(true);
   }
 
   return (
@@ -385,56 +367,15 @@ export default function Home() {
           </div>
 
           <div className="relative animate-fade-up animation-delay-200">
-            <div className="float-soft rounded-[8px] border border-slate-200 bg-white p-4 shadow-2xl shadow-blue-950/10">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-normal text-[#0a66b2]">
-                    Launch preview
-                  </p>
-                  <h2 className="mt-1 text-xl font-bold text-slate-950">
-                    Role examples coming soon
-                  </h2>
-                </div>
-                <span className="rounded-full bg-[#fff2e9] px-3 py-1 text-xs font-semibold text-[#c95709]">
-                  Preview
-                </span>
-              </div>
-
-              <div className="mt-4 space-y-3">
-                {jobs.map((job, index) => (
-                  <article
-                    key={job.role}
-                    className="job-card rounded-[8px] border border-slate-200 p-4 transition hover:border-[#0a66b2] hover:bg-blue-50/40"
-                    style={{ animationDelay: `${index * 140}ms` }}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="font-semibold text-slate-950">
-                          {job.role}
-                        </h3>
-                        <p className="mt-1 text-sm font-semibold text-slate-600">
-                          {job.company}
-                        </p>
-                      </div>
-                      <span className="shrink-0 rounded-full bg-[#fff2e9] px-3 py-1 text-xs font-semibold text-[#c95709]">
-                        {job.type}
-                      </span>
-                    </div>
-                    <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600">
-                      <span className="rounded-full bg-slate-100 px-3 py-1">
-                        {job.place}
-                      </span>
-                      <span className="rounded-full bg-slate-100 px-3 py-1">
-                        {job.salary}
-                      </span>
-                    </div>
-                    <span className="mt-4 inline-flex rounded-[6px] border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-600">
-                      Applications opening soon
-                    </span>
-                  </article>
-                ))}
-              </div>
-            </div>
+            <Image
+              src="/job.jpg"
+              alt="GoJobin job search preview"
+              width={933}
+              height={700}
+              priority
+              sizes="(min-width: 1024px) 48vw, 100vw"
+              className="float-soft h-auto w-full rounded-[8px] object-cover shadow-2xl shadow-blue-950/10"
+            />
           </div>
         </div>
       </section>
@@ -948,12 +889,13 @@ export default function Home() {
             </h3>
             <form
               className="mt-9 grid max-w-[335px] gap-5 text-sm font-bold text-white"
-              onSubmit={(event) => event.preventDefault()}
+              onSubmit={handleSubscribeSubmit}
             >
               <label>
                 <span>Your Name</span>
                 <input
                   className="mt-3 h-13 w-full bg-white px-4 text-sm font-medium text-slate-950 outline-none"
+                  required
                   type="text"
                 />
               </label>
@@ -961,13 +903,24 @@ export default function Home() {
                 <span>Your Email</span>
                 <input
                   className="mt-3 h-13 w-full bg-white px-4 text-sm font-medium text-slate-950 outline-none"
+                  required
                   type="email"
                 />
               </label>
-              <button className="shine-button mt-1 h-12 w-fit bg-[#55585c] px-5 text-sm font-bold text-white transition hover:bg-[#0a66b2]">
+              <button
+                className="shine-button mt-1 h-12 w-fit bg-[#55585c] px-5 text-sm font-bold text-white transition hover:bg-[#0a66b2]"
+                type="submit"
+              >
                 Subscribe
               </button>
             </form>
+          </div>
+        </div>
+        <div className="border-t border-white/10">
+          <div className="mx-auto max-w-7xl px-5 py-5 text-center text-sm font-semibold text-white/75 lg:px-8">
+            <p>
+              Copyright &copy; {new Date().getFullYear()} GoJobin. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
@@ -1006,6 +959,43 @@ export default function Home() {
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
       />
+
+      {isSubscribeNoticeOpen ? (
+        <div
+          className="fixed inset-0 z-[95] flex items-center justify-center bg-slate-950/60 px-4 py-6 backdrop-blur-sm"
+          role="presentation"
+          onClick={() => setIsSubscribeNoticeOpen(false)}
+        >
+          <div
+            aria-labelledby="subscribe-notice-title"
+            aria-modal="true"
+            className="modal-panel w-full max-w-sm rounded-[8px] border border-slate-200 bg-white p-5 text-center shadow-2xl shadow-slate-950/30"
+            role="dialog"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <p className="text-sm font-semibold uppercase tracking-normal text-[#c95709]">
+              Subscription update
+            </p>
+            <h2
+              className="mt-2 text-2xl font-bold text-slate-950"
+              id="subscribe-notice-title"
+            >
+              Website under construction
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              Thank you for sharing your details. This service will start after
+              the website development is complete.
+            </p>
+            <button
+              className="shine-button mt-5 h-11 rounded-[6px] bg-[#0a66b2] px-6 text-sm font-semibold text-white transition hover:bg-[#084f8a]"
+              onClick={() => setIsSubscribeNoticeOpen(false)}
+              type="button"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }
