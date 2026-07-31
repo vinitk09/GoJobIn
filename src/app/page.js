@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import EnquiryModal from "./components/EnquiryModal";
+import bannerImage from "../../public/banner.png";
 
 const locations = ["Delhi", "Kolkata", "Mumbai", "Bangalore", "Chennai"];
 
@@ -207,11 +208,6 @@ export default function Home() {
     openEnquiry(trigger.getAttribute("data-enquiry") || "General enquiry");
   }
 
-  function handleFeatureSubmit(event, context) {
-    event.preventDefault();
-    openEnquiry(context);
-  }
-
   function handleSubscribeSubmit(event) {
     event.preventDefault();
     setIsSubscribeNoticeOpen(true);
@@ -271,113 +267,14 @@ export default function Home() {
 
       </header>
 
-      <section className="relative bg-white">
-        <div className="sticky top-[126px] z-40 bg-[#f47a20] px-5 py-3 text-center text-sm font-semibold text-white shadow-md shadow-orange-950/10 max-sm:top-[162px]">
-          GoJobin website is coming soon - preview page only, applications and job posting are not live yet.
-        </div>
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,#eaf4ff_0%,#ffffff_48%,#fff5ee_100%)]" />
-        <div className="hero-grid absolute inset-0 opacity-70" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-20">
-          <div className="animate-fade-up">
-            <p className="mb-4 inline-flex rounded-full border border-[#b7d8f5] bg-white px-4 py-2 text-sm font-medium text-[#0a66b2] shadow-sm">
-              Main website under development
-            </p>
-            <h1 className="max-w-3xl text-4xl font-extrabold leading-tight tracking-normal text-slate-950 sm:text-5xl lg:text-6xl">
-              GoJobin is coming soon
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-              We are building a fresh job portal experience for candidates and
-              employers across India. Stay connected while the full website gets
-              ready.
-            </p>
-
-            <form
-              className="search-card mt-8 rounded-[8px] border border-slate-200 bg-white p-3 shadow-xl shadow-blue-950/10"
-              onSubmit={(event) => handleFeatureSubmit(event, "Search jobs")}
-            >
-              <div className="grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.9fr)_minmax(0,0.85fr)_minmax(150px,auto)]">
-                <label className="field-card flex min-h-14 flex-col justify-center rounded-[6px] border border-slate-200 bg-slate-50 px-4">
-                  <span className="text-xs font-medium uppercase tracking-normal text-slate-500">
-                    What
-                  </span>
-                  <input
-                    className="mt-1 bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-400"
-                    placeholder="Job title, keywords, or company"
-                    type="search"
-                  />
-                </label>
-                <label className="field-card flex min-h-14 flex-col justify-center rounded-[6px] border border-slate-200 bg-slate-50 px-4">
-                  <span className="text-xs font-medium uppercase tracking-normal text-slate-500">
-                    Where
-                  </span>
-                  <input
-                    className="mt-1 bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-400"
-                    placeholder="City, state, or remote"
-                    type="search"
-                  />
-                </label>
-                <div
-                  aria-label="Sector selection will be available when the full website launches"
-                  className="field-card flex min-h-14 flex-col justify-center rounded-[6px] border border-slate-200 bg-slate-50 px-4"
-                >
-                  <span className="text-xs font-medium uppercase tracking-normal text-slate-500">
-                    Sector
-                  </span>
-                  <span className="mt-1 text-sm font-medium text-slate-900">
-                    All sectors opening soon
-                  </span>
-                </div>
-                <button className="shine-button min-h-14 w-full min-w-[150px] whitespace-nowrap rounded-[6px] bg-[#f47a20] px-5 text-sm font-semibold leading-none text-white shadow-lg shadow-orange-900/20 transition hover:-translate-y-0.5">
-                  Notify Me
-                </button>
-              </div>
-            </form>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                className="rounded-full bg-[#13365f] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-950/15 transition hover:-translate-y-0.5"
-                href="#candidate"
-                data-enquiry="Candidate launch updates"
-              >
-                Candidate updates
-              </a>
-              <a
-                className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0a66b2]"
-                href="#employer"
-                data-enquiry="Employer launch updates"
-              >
-                Employer updates
-              </a>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-2 text-xs font-medium text-slate-600">
-              {["Remote jobs", "Walk-in roles", "Fresher hiring", "Verified employers"].map(
-                (item) => (
-                  <button
-                    key={item}
-                    className="feature-chip rounded-full border border-slate-200 bg-white/80 px-3 py-2"
-                    data-enquiry={item}
-                    type="button"
-                  >
-                    {item}
-                  </button>
-                ),
-              )}
-            </div>
-          </div>
-
-          <div className="relative animate-fade-up animation-delay-200">
-            <Image
-              src="/job.jpg"
-              alt="GoJobin job search preview"
-              width={933}
-              height={700}
-              priority
-              sizes="(min-width: 1024px) 48vw, 100vw"
-              className="float-soft h-auto w-full rounded-[8px] object-cover shadow-2xl shadow-blue-950/10"
-            />
-          </div>
-        </div>
+      <section className="bg-white">
+        <Image
+          src={bannerImage}
+          alt="GoJobin hero banner"
+          priority
+          sizes="100vw"
+          className="h-auto w-full"
+        />
       </section>
 
       <section className="border-y border-slate-200 bg-white" data-scroll-reveal>
