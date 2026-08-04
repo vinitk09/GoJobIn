@@ -5,10 +5,8 @@ import { useEffect, useState } from "react";
 import EnquiryModal from "./components/EnquiryModal";
 import bannerImage from "../../public/banner.png";
 
-const locations = ["Delhi", "Kolkata", "Mumbai", "Bangalore", "Chennai"];
-
 const stats = [
-  { value: "5", label: "Launch cities" },
+  { value: "All India", label: "Coverage" },
   { value: "8", label: "Sectors planned" },
   { value: "2", label: "User journeys" },
   { value: "Soon", label: "Full platform" },
@@ -145,7 +143,7 @@ function SocialIcon({ label }) {
 export default function Home() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [enquiryFor, setEnquiryFor] = useState("General enquiry");
-  const [isSubscribeNoticeOpen, setIsSubscribeNoticeOpen] = useState(false);
+  const [isComingSoonBannerOpen, setIsComingSoonBannerOpen] = useState(false);
 
   useEffect(() => {
     const revealItems = Array.from(
@@ -192,6 +190,18 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isComingSoonBannerOpen) {
+      return undefined;
+    }
+
+    const timer = window.setTimeout(() => {
+      setIsComingSoonBannerOpen(true);
+    }, 5000);
+
+    return () => window.clearTimeout(timer);
+  }, [isComingSoonBannerOpen]);
+
   function openEnquiry(context) {
     setEnquiryFor(context);
     setIsEnquiryOpen(true);
@@ -208,11 +218,6 @@ export default function Home() {
     openEnquiry(trigger.getAttribute("data-enquiry") || "General enquiry");
   }
 
-  function handleSubscribeSubmit(event) {
-    event.preventDefault();
-    setIsSubscribeNoticeOpen(true);
-  }
-
   return (
     <>
     <main
@@ -220,16 +225,6 @@ export default function Home() {
       onClick={handleFeatureClick}
     >
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="bg-[#16467d] text-sm font-medium text-white">
-          <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-3 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-            <p>{locations.join(" | ")}</p>
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              <a href="tel:+919162080808">+91-9162080808</a>
-              <a href="mailto:info@gojobin.com">info@gojobin.com</a>
-            </div>
-          </div>
-        </div>
-
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-5 lg:px-8">
           <a href="#" className="shrink-0 transition hover:scale-[1.02]" aria-label="GoJobin home">
             <Image
@@ -603,7 +598,7 @@ export default function Home() {
                 </p>
                 <a
                   className="mt-1 inline-flex text-sm text-[#0a66b2]"
-                  href="tel:+919162080808"
+                  href="#enquiry"
                 >
                   +91-9162080808
                 </a>
@@ -614,7 +609,9 @@ export default function Home() {
                 </p>
                 <a
                   className="mt-1 inline-flex text-sm text-[#0a66b2]"
-                  href="mailto:info@gojobin.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=info@gojobin.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   info@gojobin.com
                 </a>
@@ -683,92 +680,26 @@ export default function Home() {
       </section>
 
       <footer className="bg-[#071723] text-white" data-scroll-reveal>
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:py-16 md:grid-cols-2 lg:grid-cols-[1.12fr_0.78fr_0.9fr_1.05fr_1.35fr] lg:gap-12 lg:px-8">
-          <div className="max-w-[275px]">
+        <div className="border-t-4 border-[#0a66b2]" />
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 py-9 md:grid-cols-2 lg:grid-cols-[1.35fr_0.72fr_0.82fr_1.2fr] lg:gap-6 lg:px-8">
+          <div className="max-w-sm">
             <Image
               src="/GoJobin-logo.png"
               alt="GoJobin"
               width={1366}
               height={573}
-              className="h-auto w-40 sm:w-48"
+              className="h-auto w-36 sm:w-44"
             />
-            <p className="mt-9 text-sm font-semibold leading-8 text-white">
+            <p className="mt-4 text-sm font-medium leading-6 text-white/80">
               gojobin.com is a classified website for jobs. Our goal at
               gojobin.com is to make it as easy as possible to search or post
               jobs.
             </p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold tracking-normal text-white">
-              Company
-            </h3>
-            <div className="mt-9 grid gap-6 text-sm font-bold text-white">
-              {footerCompanyLinks.map((link) => (
-                <a
-                  className="group flex items-center gap-4 transition hover:text-[#2fb8ff]"
-                  href={link.href}
-                  key={link.label}
-                >
-                  <span className="text-base font-black leading-none text-[#21b8ff]">
-                    &gt;
-                  </span>
-                  <span>{link.label}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold tracking-normal text-white">
-              Quick Links
-            </h3>
-            <div className="mt-9 grid gap-6 text-sm font-bold text-white">
-              {footerQuickLinks.map((link) => (
-                <a
-                  className="group flex items-center gap-4 transition hover:text-[#2fb8ff]"
-                  href={link.href}
-                  key={link.label}
-                >
-                  <span className="text-base font-black leading-none text-[#21b8ff]">
-                    &gt;
-                  </span>
-                  <span>{link.label}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold tracking-normal text-white">
-              Contact Us
-            </h3>
-            <div className="mt-9 space-y-5 text-sm font-bold leading-6 text-white">
-              <p>
-                Mobile No -
-                <a className="transition hover:text-[#2fb8ff]" href="tel:+919162080808">
-                  {" "}
-                  +91-9162080808
-                </a>
-              </p>
-              <p>Monday - Saturday</p>
-              <p>(10:00AM to 06:00PM IST)</p>
-              <p>
-                Email -
-                <a
-                  className="transition hover:text-[#2fb8ff]"
-                  href="mailto:info@gojobin.com"
-                >
-                  {" "}
-                  info@gojobin.com
-                </a>
-              </p>
-            </div>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-wrap gap-2.5">
               {socialLinks.map((social) => (
                 <a
                   aria-label={social.label}
-                  className="flex h-12 w-12 items-center justify-center bg-[#4a4d51] text-white transition hover:bg-[#0a66b2]"
+                  className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-white/10 text-white transition hover:bg-[#0a66b2]"
                   href={social.href}
                   key={social.label}
                   rel="noopener noreferrer"
@@ -781,43 +712,88 @@ export default function Home() {
           </div>
 
           <div>
-            <h3 className="text-xl font-bold tracking-normal text-white">
-              Subscribe With Us
+            <h3 className="text-lg font-bold tracking-normal text-white">
+              Company
             </h3>
-            <form
-              className="mt-9 grid max-w-[335px] gap-5 text-sm font-bold text-white"
-              onSubmit={handleSubscribeSubmit}
-            >
-              <label>
-                <span>Your Name</span>
-                <input
-                  className="mt-3 h-13 w-full bg-white px-4 text-sm font-medium text-slate-950 outline-none"
-                  required
-                  type="text"
-                />
-              </label>
-              <label>
-                <span>Your Email</span>
-                <input
-                  className="mt-3 h-13 w-full bg-white px-4 text-sm font-medium text-slate-950 outline-none"
-                  required
-                  type="email"
-                />
-              </label>
-              <button
-                className="shine-button mt-1 h-12 w-fit bg-[#55585c] px-5 text-sm font-bold text-white transition hover:bg-[#0a66b2]"
-                type="submit"
+            <div className="mt-3 grid gap-2 text-sm font-semibold text-white/85">
+              {footerCompanyLinks.map((link) => (
+                <a
+                  className="group flex items-center gap-2.5 border-b border-white/10 pb-2 transition last:border-b-0 hover:text-[#2fb8ff]"
+                  href={link.href}
+                  key={link.label}
+                >
+                  <span className="text-sm font-black leading-none text-[#21b8ff] transition group-hover:translate-x-0.5">
+                    &gt;
+                  </span>
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-bold tracking-normal text-white">
+              Quick Links
+            </h3>
+            <div className="mt-3 grid gap-2 text-sm font-semibold text-white/85">
+              {footerQuickLinks.map((link) => (
+                <a
+                  className="group flex items-center gap-2.5 border-b border-white/10 pb-2 transition last:border-b-0 hover:text-[#2fb8ff]"
+                  href={link.href}
+                  key={link.label}
+                >
+                  <span className="text-sm font-black leading-none text-[#21b8ff] transition group-hover:translate-x-0.5">
+                    &gt;
+                  </span>
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-bold tracking-normal text-white">
+              Contact Us
+            </h3>
+            <div className="mt-3 grid gap-2 text-sm font-semibold leading-6 text-white/85">
+              <a
+                className="rounded-[8px] border border-white/10 bg-white/[0.04] px-4 py-2.5 transition hover:border-[#2fb8ff]/60 hover:text-[#2fb8ff]"
+                href="#enquiry"
               >
-                Subscribe
-              </button>
-            </form>
+                +91-9162080808
+              </a>
+              <a
+                className="rounded-[8px] border border-white/10 bg-white/[0.04] px-4 py-2.5 transition hover:border-[#2fb8ff]/60 hover:text-[#2fb8ff]"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=info@gojobin.com"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                info@gojobin.com
+              </a>
+              <div className="rounded-[8px] border border-white/10 bg-white/[0.04] px-4 py-2.5">
+                <p>Monday - Saturday</p>
+                <p className="mt-1 text-white/60">10:00AM to 06:00PM IST</p>
+              </div>
+            </div>
           </div>
         </div>
         <div className="border-t border-white/10">
-          <div className="mx-auto max-w-7xl px-5 py-5 text-center text-sm font-semibold text-white/75 lg:px-8">
+          <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-center text-sm font-semibold text-white/65 sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-8">
             <p>
-              Copyright &copy; {new Date().getFullYear()} GoJobin. All rights reserved.
+              Copyright &copy; {new Date().getFullYear()} GoJobin. All rights
+              reserved. A Unit of Vidi Meth Digital Services (OPC) Pvt. Ltd.
             </p>
+            <div className="flex justify-center gap-4">
+              {footerQuickLinks.slice(1).map((link) => (
+                <a
+                  className="transition hover:text-[#2fb8ff]"
+                  href={link.href}
+                  key={link.label}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
@@ -857,39 +833,32 @@ export default function Home() {
         onClose={() => setIsEnquiryOpen(false)}
       />
 
-      {isSubscribeNoticeOpen ? (
+      {isComingSoonBannerOpen && !isEnquiryOpen ? (
         <div
-          className="fixed inset-0 z-[95] flex items-center justify-center bg-slate-950/60 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-[88] flex items-center justify-center bg-slate-950/55 px-4 py-6 backdrop-blur-sm"
           role="presentation"
-          onClick={() => setIsSubscribeNoticeOpen(false)}
+          onClick={() => setIsComingSoonBannerOpen(false)}
         >
           <div
-            aria-labelledby="subscribe-notice-title"
+            aria-label="GoJobin coming soon banner"
             aria-modal="true"
-            className="modal-panel w-full max-w-sm rounded-[8px] border border-slate-200 bg-white p-5 text-center shadow-2xl shadow-slate-950/30"
+            className="coming-soon-popup relative w-fit max-w-[92vw] overflow-hidden rounded-[8px] border border-white/70 bg-white shadow-2xl shadow-slate-950/35"
             role="dialog"
             onClick={(event) => event.stopPropagation()}
           >
-            <p className="text-sm font-semibold uppercase tracking-normal text-[#c95709]">
-              Subscription update
-            </p>
-            <h2
-              className="mt-2 text-2xl font-bold text-slate-950"
-              id="subscribe-notice-title"
-            >
-              Website under construction
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              Thank you for sharing your details. This service will start after
-              the website development is complete.
-            </p>
             <button
-              className="shine-button mt-5 h-11 rounded-[6px] bg-[#0a66b2] px-6 text-sm font-semibold text-white transition hover:bg-[#084f8a]"
-              onClick={() => setIsSubscribeNoticeOpen(false)}
+              aria-label="Close coming soon banner"
+              className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-2xl leading-none text-slate-700 shadow-lg shadow-slate-950/15 transition hover:bg-[#0a66b2] hover:text-white"
+              onClick={() => setIsComingSoonBannerOpen(false)}
               type="button"
             >
-              OK
+              x
             </button>
+            <img
+              src="/gojobinbannercomingsoon.png?v=2"
+              alt="GoJobin coming soon"
+              className="block h-auto max-h-[70vh] max-w-[48rem] object-contain"
+            />
           </div>
         </div>
       ) : null}
