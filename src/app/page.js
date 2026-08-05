@@ -104,6 +104,8 @@ const initialEnquiryForm = {
   message: "",
 };
 
+const comingSoonBannerDismissedKey = "gojobinComingSoonBannerDismissed";
+
 function SocialIcon({ label }) {
   if (label === "Facebook") {
     return (
@@ -159,6 +161,8 @@ export default function Home() {
   const [isEnquirySubmitting, setIsEnquirySubmitting] = useState(false);
   const [isEnquiryFormActive, setIsEnquiryFormActive] = useState(false);
   const [isComingSoonBannerOpen, setIsComingSoonBannerOpen] = useState(false);
+  const [isComingSoonBannerDismissed, setIsComingSoonBannerDismissed] =
+    useState(false);
 
   useEffect(() => {
     const revealItems = Array.from(
@@ -206,16 +210,47 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (isComingSoonBannerOpen || isEnquiryOpen || isEnquiryFormActive) {
+    try {
+      setIsComingSoonBannerDismissed(
+        window.localStorage.getItem(comingSoonBannerDismissedKey) === "true",
+      );
+    } catch {
+      setIsComingSoonBannerDismissed(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      isComingSoonBannerDismissed ||
+      isComingSoonBannerOpen ||
+      isEnquiryOpen ||
+      isEnquiryFormActive
+    ) {
       return undefined;
     }
 
     const timer = window.setTimeout(() => {
       setIsComingSoonBannerOpen(true);
-    }, 5000);
+    }, 10000);
 
     return () => window.clearTimeout(timer);
-  }, [isComingSoonBannerOpen, isEnquiryFormActive, isEnquiryOpen]);
+  }, [
+    isComingSoonBannerDismissed,
+    isComingSoonBannerOpen,
+    isEnquiryFormActive,
+    isEnquiryOpen,
+  ]);
+
+  function dismissComingSoonBanner() {
+    setIsComingSoonBannerOpen(false);
+    setIsComingSoonBannerDismissed(true);
+
+    try {
+      window.localStorage.setItem(comingSoonBannerDismissedKey, "true");
+    } catch {
+      // Ignore storage failures so the close button still works.
+    }
+  }
 
   function openEnquiry(context) {
     setEnquiryFor(context);
@@ -953,7 +988,7 @@ export default function Home() {
             <button
               aria-label="Close coming soon banner"
               className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-2xl leading-none text-slate-700 shadow-lg shadow-slate-950/15 transition hover:bg-[#0a66b2] hover:text-white"
-              onClick={() => setIsComingSoonBannerOpen(false)}
+              onClick={dismissComingSoonBanner}
               type="button"
             >
               x
