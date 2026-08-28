@@ -1,5 +1,7 @@
+export const dynamic = "force-dynamic";
+
 const GOJOBIN_API_BASE_URL = (
-  process.env.GOJOBIN_API_BASE_URL || "http://localhost:5000"
+  process.env.GOJOBIN_API_BASE_URL || "http://187.77.184.141:5050"
 ).replace(/\/+$/, "");
 
 function parseResponseBody(text) {
